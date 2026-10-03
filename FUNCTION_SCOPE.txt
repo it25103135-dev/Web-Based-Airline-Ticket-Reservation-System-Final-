@@ -1,0 +1,49 @@
+LANKA WINGS - BOOKING MANAGEMENT
+================================
+
+Assigned functional area:
+- Book Flight on Behalf of Client
+- Booking Management
+
+OWNED FUNCTIONALITY
+-------------------
+1. Travel Agent flight search (read-only flight dependency)
+2. Select a registered passenger/client account
+3. Create a booking on behalf of that client
+4. Link every created booking to both:
+   - the client/passenger account (UserID)
+   - the Travel Agent account (AgentUserID)
+5. Seat availability checking and concurrency-safe reservation creation
+6. Passenger name and passport/ID validation
+7. PNR generation
+8. 5% agent commission record for the booking relationship
+9. View bookings based on role:
+   - Travel Agent: bookings created by that agent
+   - Passenger: bookings belonging to that passenger
+   - Admin: all booking records
+10. Edit booking passenger details and seat
+11. Cancel a booking
+12. Booking audit trail for CREATE / UPDATE / CANCEL actions
+13. Role-based authorization and CSRF/session security
+
+SHARED / MINIMUM DEPENDENCIES
+-----------------------------
+- Users: authentication and client lookup only
+- Flights: read/search flight information only
+- Common security, validation, JDBC and UI files
+
+INTENTIONALLY EXCLUDED
+----------------------
+- User signup/profile/user administration
+- Flight creation/edit/delete administration
+- Online payment gateway or card processing
+- Payment transaction management
+- Refund processing
+- E-ticket generation / ticket administration
+- Feedback
+- Loyalty / promotions
+- Notification management
+
+IMPORTANT BOUNDARY
+------------------
+PaymentStatus is stored/displayed only as a booking integration state. This package has no payment gateway and no payment action. If a paid booking is cancelled, this package changes only BookingStatus to CANCELLED. Refund handling remains a separate Refund / Customer Support responsibility.
