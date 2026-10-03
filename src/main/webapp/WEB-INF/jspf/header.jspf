@@ -1,0 +1,18 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/jspf/flash.jspf" %>
+<header class="topbar">
+  <a class="brand" href="<%=cp + ("ADMIN".equals(role)?"/admin/tickets":"/dashboard")%>"><span class="brand-mark">LW</span><span>Lanka <b>Wings</b></span></a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu">☰</button>
+  <nav class="nav-links">
+    <% if ("ADMIN".equals(role)) { %>
+      <a class="<%=act(uri,"/admin/tickets")%>" href="<%=cp%>/admin/tickets">Ticket Admin</a>
+    <% } else { %>
+      <a class="<%=act(uri,"/dashboard")%>" href="<%=cp%>/dashboard">Dashboard</a>
+      <a class="<%=act(uri,"/flights")%>" href="<%=cp%>/flights">Find Flights</a>
+      <a class="<%=act(uri,"/reservations")%>" href="<%=cp%>/reservations">My Reservations</a>
+    <% } %>
+    <% if (session.getAttribute("userId") != null) { %>
+    <form class="logout-form" method="post" action="<%=cp%>/logout"><%@ include file="/WEB-INF/jspf/csrf.jspf" %><button class="nav-cta" type="submit">Logout</button></form>
+    <% } %>
+  </nav>
+</header>

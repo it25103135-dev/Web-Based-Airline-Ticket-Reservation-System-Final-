@@ -1,0 +1,62 @@
+IF DB_ID('LankaWingsTicketReservationDB') IS NULL BEGIN CREATE DATABASE LankaWingsTicketReservationDB; END;
+GO
+USE LankaWingsTicketReservationDB;
+GO
+IF OBJECT_ID('dbo.Tickets','U') IS NOT NULL DROP TABLE dbo.Tickets;
+IF OBJECT_ID('dbo.Bookings','U') IS NOT NULL DROP TABLE dbo.Bookings;
+IF OBJECT_ID('dbo.Flights','U') IS NOT NULL DROP TABLE dbo.Flights;
+IF OBJECT_ID('dbo.Users','U') IS NOT NULL DROP TABLE dbo.Users;
+GO
+CREATE TABLE Users(
+ UserID INT IDENTITY(1,1) PRIMARY KEY, FullName VARCHAR(120) NOT NULL, Username VARCHAR(60) NOT NULL UNIQUE,
+ Email VARCHAR(120) NOT NULL UNIQUE, Phone VARCHAR(25), PasswordHash VARCHAR(255) NOT NULL,
+ Role VARCHAR(20) NOT NULL DEFAULT 'PASSENGER' CHECK(Role IN('PASSENGER','ADMIN')), Status VARCHAR(20) NOT NULL DEFAULT 'ACTIVE' CHECK(Status IN('ACTIVE','INACTIVE')),
+ CreatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME()
+);
+CREATE TABLE Flights(
+ FlightID INT IDENTITY(1,1) PRIMARY KEY, FlightNo VARCHAR(15) NOT NULL UNIQUE, Origin VARCHAR(80) NOT NULL, Destination VARCHAR(80) NOT NULL,
+ DepartureTime DATETIME2 NOT NULL, ArrivalTime DATETIME2 NOT NULL, Fare DECIMAL(10,2) NOT NULL CHECK(Fare>=0), TotalSeats INT NOT NULL CHECK(TotalSeats>0),
+ Status VARCHAR(20) NOT NULL CHECK(Status IN('SCHEDULED','BOARDING','DELAYED','CANCELLED','COMPLETED')), Aircraft VARCHAR(80) NOT NULL
+);
+CREATE TABLE Bookings(
+ BookingID INT IDENTITY(1,1) PRIMARY KEY, PNR VARCHAR(20) NOT NULL UNIQUE, UserID INT NOT NULL, FlightID INT NOT NULL,
+ PassengerName VARCHAR(120) NOT NULL, PassportNo VARCHAR(40) NOT NULL, SeatNumber VARCHAR(8) NOT NULL,
+ BookingStatus VARCHAR(20) NOT NULL DEFAULT 'PENDING' CHECK(BookingStatus IN('PENDING','CONFIRMED','CANCELLED')),
+ PaymentStatus VARCHAR(20) NOT NULL DEFAULT 'UNPAID' CHECK(PaymentStatus IN('UNPAID','PAID','REFUNDED')), BookedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+ CONSTRAINT FK_Bookings_Users FOREIGN KEY(UserID) REFERENCES Users(UserID), CONSTRAINT FK_Bookings_Flights FOREIGN KEY(FlightID) REFERENCES Flights(FlightID)
+);
+GO
+CREATE UNIQUE INDEX UX_Bookings_ActiveSeat ON Bookings(FlightID,SeatNumber) WHERE BookingStatus<>'CANCELLED';
+CREATE UNIQUE INDEX UX_Bookings_ActivePassenger ON Bookings(FlightID,PassportNo) WHERE BookingStatus<>'CANCELLED';
+GO
+CREATE TABLE Tickets(
+ TicketID INT IDENTITY(1,1) PRIMARY KEY, TicketNumber VARCHAR(40) NOT NULL UNIQUE, BookingID INT NOT NULL UNIQUE,
+ TicketStatus VARCHAR(20) NOT NULL DEFAULT 'ISSUED' CHECK(TicketStatus IN('ISSUED','CANCELLED')), IssuedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(), LastUpdatedAt DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+ CONSTRAINT FK_Tickets_Bookings FOREIGN KEY(BookingID) REFERENCES Bookings(BookingID)
+);
+GO
+-- Demo passwords:
+-- passenger -> Passenger123
+-- admin     -> Lankawings@admin
+INSERT INTO Users(FullName,Username,Email,Phone,PasswordHash,Role) VALUES
+('Demo Passenger','passenger','passenger@example.com','0711112233','pbkdf2_sha256$600000$+vgadORXnkSC8p5ub9Wx1Q==$NjqrpZDXXWAfVwabhWYkzr4mUY+Q73edwupWsBwdqWg=','PASSENGER'),
+('Ticket Administrator','admin','admin@lankawings.lk','0710000000','pbkdf2_sha256$600000$ogYFZUjli+ekkiC8quP/VQ==$cFb5oUo9cDOznIz2kF1Sy5PUCuevDxmEvRScaHXdMd8=','ADMIN');
+
+INSERT INTO Flights(FlightNo,Origin,Destination,DepartureTime,ArrivalTime,Fare,TotalSeats,Status,Aircraft) VALUES
+('LW101','Colombo (CMB)','Dubai (DXB)',DATEADD(DAY,3,SYSDATETIME()),DATEADD(HOUR,8,DATEADD(DAY,3,SYSDATETIME())),78500.00,72,'SCHEDULED','Airbus A320neo'),
+('LW204','Colombo (CMB)','Doha (DOH)',DATEADD(DAY,5,SYSDATETIME()),DATEADD(HOUR,7,DATEADD(DAY,5,SYSDATETIME())),69900.00,72,'SCHEDULED','Airbus A320'),
+('LW330','Colombo (CMB)','Singapore (SIN)',DATEADD(DAY,8,SYSDATETIME()),DATEADD(HOUR,5,DATEADD(DAY,8,SYSDATETIME())),92500.00,84,'DELAYED','Airbus A321'),
+('LW415','Colombo (CMB)','Kuala Lumpur (KUL)',DATEADD(DAY,10,SYSDATETIME()),DATEADD(HOUR,4,DATEADD(DAY,10,SYSDATETIME())),64800.00,72,'SCHEDULED','Airbus A320neo');
+
+DECLARE @U INT=(SELECT UserID FROM Users WHERE Username='passenger');
+DECLARE @F1 INT=(SELECT FlightID FROM Flights WHERE FlightNo='LW101');
+DECLARE @F2 INT=(SELECT FlightID FROM Flights WHERE FlightNo='LW204');
+INSERT INTO Bookings(PNR,UserID,FlightID,PassengerName,PassportNo,SeatNumber,BookingStatus,PaymentStatus) VALUES
+('LW-DEMO-PEND',@U,@F1,'Demo Passenger','N1234567','2A','PENDING','UNPAID'),
+('LW-DEMO-PAID',@U,@F2,'Demo Passenger','N7654321','3C','CONFIRMED','PAID');
+
+DECLARE @PaidBooking INT=(SELECT BookingID FROM Bookings WHERE PNR='LW-DEMO-PAID');
+INSERT INTO Tickets(TicketNumber,BookingID,TicketStatus) VALUES('LWT-LW-DEMO-PAID-DEMO01',@PaidBooking,'ISSUED');
+GO
+CREATE INDEX IX_Bookings_User ON Bookings(UserID);CREATE INDEX IX_Bookings_Flight ON Bookings(FlightID);
+GO

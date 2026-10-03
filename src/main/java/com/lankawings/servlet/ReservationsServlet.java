@@ -1,0 +1,3 @@
+package com.lankawings.servlet;
+import com.lankawings.dao.*;import com.lankawings.util.Req;import jakarta.servlet.ServletException;import jakarta.servlet.annotation.WebServlet;import jakarta.servlet.http.*;import java.io.IOException;
+@WebServlet("/reservations") public class ReservationsServlet extends HttpServlet{@Override protected void doGet(HttpServletRequest r,HttpServletResponse s)throws ServletException,IOException{try{int uid=Req.uid(r);r.setAttribute("reservations",new BookingDAO().listForUser(uid));r.setAttribute("tickets",new TicketDAO().mapForUser(uid));}catch(Exception e){Req.error(r,e);}r.getRequestDispatcher("/WEB-INF/views/reservations.jsp").forward(r,s);}}

@@ -1,0 +1,34 @@
+LANKA WINGS AIRLINES — TICKET RESERVATION
+
+OWNED FUNCTION
+- Search available future flights
+- View flight details, fare and current available-seat count
+- Display live seat map and already-taken seats
+- Validate passenger name, passport/ID and seat selection
+- Prevent duplicate active seats
+- Prevent the same passport/ID from holding two active reservations on the same flight
+- Create reservation and unique PNR
+- Passenger can view own reservations
+- Passenger can use one button: "Mark Paid & View Ticket"
+- That one action changes the reservation to CONFIRMED / PAID and creates the e-ticket
+- Passenger can view and print the e-ticket
+- Admin panel lists all issued tickets
+- Admin can edit ticket-linked passenger name, passport/ID and seat
+- Admin can delete an issued ticket document while keeping the reservation
+
+SHARED MINIMUM DEPENDENCIES
+- Passenger/admin login and session authentication
+- Read-only flight data
+- Database connection, validation, CSRF and security utilities
+
+NOT INCLUDED
+- Card entry
+- Online transaction processing
+- Payment transaction records/history/receipts
+- Refund/customer support
+- General booking cancellation module
+- Flight schedule administration
+- User account/role administration
+- Feedback
+- Promotions/loyalty/reports
+- General notification management
