@@ -1,7 +1,0 @@
-<%@ page pageEncoding="UTF-8" %>
-<div class="background-video-layer" aria-hidden="true">
-  <video class="page-background-video" autoplay muted loop playsinline preload="metadata" poster="<%=cp%>/assets/images/home-bg.png" tabindex="-1">
-    <source src="<%=cp%>/assets/videos/aviation-background1.mp4" type="video/mp4">
-  </video>
-</div>
-<button class="video-toggle" type="button" aria-label="Pause background video" hidden>Pause video</button>
