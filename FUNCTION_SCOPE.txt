@@ -1,0 +1,33 @@
+LANKA WINGS AIRLINES — FEEDBACK MANAGEMENT
+
+BUSINESS FUNCTION INCLUDED
+- Passenger feedback/review submission
+- 1–5 star rating
+- Subject and message validation
+- Passenger view of own feedback
+- Edit own feedback while OPEN
+- Delete own feedback while OPEN
+- Admin view of all passenger feedback
+- Admin response / edit response
+- Admin close feedback
+- Admin delete feedback
+- Overall rating statistics and per-star counts
+- Search and status filtering in the interface
+- 5-feedback-per-24-hours anti-spam rule
+
+MINIMUM SHARED DEPENDENCIES
+- Login/logout
+- User role/status lookup (PASSENGER vs ADMIN)
+- SQL Server connection
+- Session/CSRF/security filter
+- Common validation, escaping and styling
+
+EXCLUDED
+- Notification management or notification integration
+- Flight management
+- Ticket reservation/e-ticketing
+- Booking management
+- Payment management
+- Refund management
+- User signup/profile/user administration
+- Promotions/loyalty/reports
