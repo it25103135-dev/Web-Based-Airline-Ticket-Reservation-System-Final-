@@ -1,0 +1,22 @@
+LANKA WINGS - TOMCAT 10 SETUP
+
+1) Run sql/LankaWingsDB.sql in SQL Server Management Studio.
+2) Confirm SQL Server login exists:
+   username: Lankawings
+   password: Lankawings123
+3) Make sure TCP/IP and port 1433 are enabled.
+4) Install JDK 17+ and Maven.
+5) Open terminal in this project folder and run:
+   mvn clean package
+6) Copy target/LankaWings.war to:
+   <TOMCAT_HOME>/webapps/
+7) Start Tomcat 10 and open:
+   http://localhost:8080/LankaWings/
+
+Demo application admin login:
+Username: admin@lankawings.com
+Password: Lankawings@admin
+
+Passenger demo:
+Username: passenger
+Password: Passenger123

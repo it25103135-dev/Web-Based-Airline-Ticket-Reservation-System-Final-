@@ -1,0 +1,5 @@
+com\lankawings\dao\TicketManagementTest.class
+com\lankawings\dao\PaymentDeleteTest.class
+com\lankawings\servlet\PaymentDeleteTest.class
+com\lankawings\servlet\BookingConfirmationTest.class
+com\lankawings\servlet\TicketDeletePermissionTest.class
