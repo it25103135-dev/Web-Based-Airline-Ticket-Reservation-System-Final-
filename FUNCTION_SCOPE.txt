@@ -1,0 +1,29 @@
+LANKA WINGS AIRLINES — FLIGHT MANAGEMENT
+
+OWNED FUNCTION
+- Create flight schedules
+- View/search published flight schedules
+- Update route, departure/arrival time, fare, aircraft, capacity and flight status
+- Detect aircraft scheduling conflicts before publishing changes
+- Prevent total seat capacity from being reduced below existing active bookings
+- Prevent physical deletion of flights that already have bookings
+- Mark flights delayed/cancelled/completed through status management
+- Create flight-change notification records when a flight is delayed, cancelled or rescheduled
+
+SHARED MINIMUM DEPENDENCIES
+- Authentication/session and RESERVATION_MANAGER role check
+- Database connection
+- Booking rows used only for booked-seat count, safe delete/capacity validation and affected-passenger lookup
+- Notification insert used only as an output of flight schedule changes
+- Common UI/security assets
+
+NOT INCLUDED
+- Booking create/edit/cancel management
+- Seat reservation
+- Ticket/e-ticket management
+- Online payment
+- Refund/customer support
+- User account CRUD/role administration
+- Feedback
+- Promotions/loyalty/reports
+- General notification management UI

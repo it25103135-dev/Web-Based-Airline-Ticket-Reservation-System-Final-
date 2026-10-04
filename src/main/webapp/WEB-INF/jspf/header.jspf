@@ -1,0 +1,12 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/jspf/flash.jspf" %>
+<header class="topbar">
+  <a class="brand" href="<%=cp%>/dashboard"><span class="brand-mark">LW</span><span>Lanka <b>Wings</b></span></a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu">☰</button>
+  <nav class="nav-links">
+    <a class="<%=act(uri,"/dashboard")%>" href="<%=cp%>/dashboard">Dashboard</a>
+    <a class="<%=act(uri,"/admin/flights")%>" href="<%=cp%>/admin/flights">Manage Flights</a>
+    <a class="<%=act(uri,"/flights")%>" href="<%=cp%>/flights">Published Schedule</a>
+    <form class="logout-form" method="post" action="<%=cp%>/logout"><%@ include file="/WEB-INF/jspf/csrf.jspf" %><button class="nav-cta" type="submit">Logout</button></form>
+  </nav>
+</header>
