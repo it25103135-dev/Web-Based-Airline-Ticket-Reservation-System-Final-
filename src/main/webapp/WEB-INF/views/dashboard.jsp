@@ -1,0 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="java.util.*,java.text.SimpleDateFormat,java.math.BigDecimal,com.lankawings.model.Booking" %>
+<!doctype html><html lang="en"><head><title>Payment Dashboard | Lanka Wings</title><%@ include file="/WEB-INF/jspf/head.jspf" %></head><body class="app-page"><%@ include file="/WEB-INF/jspf/header.jspf" %>
+<main class="container page-pad"><div class="page-title"><span class="eyebrow navy">PAYMENT MANAGEMENT</span><h1>Online payment dashboard</h1></div>
+<% if(err!=null){%><div class="alert error"><%=h(err)%></div><%}%>
+<% if("ADMIN".equals(role)){ BigDecimal revenue=(BigDecimal)request.getAttribute("revenue"); %><section class="panel"><span class="eyebrow navy">PAYMENT OVERVIEW</span><h2>Successful revenue</h2><p class="amount" style="font-size:2rem">LKR <%=revenue==null?"0.00":String.format("%,.2f",revenue)%></p><a class="btn btn-orange" href="<%=cp%>/payments">Review all payment records</a></section><% } %>
+<section class="section"><div class="section-heading"><span class="eyebrow navy">READY FOR CHECKOUT</span><h2>Your unpaid bookings</h2></div>
+<div class="table-wrap panel"><table><thead><tr><th>PNR</th><th>Flight</th><th>Route</th><th>Passenger</th><th>Seat</th><th>Amount</th><th>Action</th></tr></thead><tbody>
+<% List<Booking> bs=(List<Booking>)request.getAttribute("payableBookings"); if(bs!=null&&!bs.isEmpty()){for(Booking b:bs){%><tr><td><b><%=h(b.getPnr())%></b></td><td><%=h(b.getFlightNo())%></td><td><%=h(b.getOrigin())%> → <%=h(b.getDestination())%></td><td><%=h(b.getPassengerName())%></td><td><%=h(b.getSeatNumber())%></td><td class="amount">LKR <%=String.format("%,.2f",b.getFare())%></td><td><a class="btn btn-orange small" href="<%=cp%>/payment?bookingId=<%=b.getBookingId()%>">Pay now</a></td></tr><%}}else{%><tr><td colspan="7" class="empty">No unpaid eligible bookings are available for this account.</td></tr><%}%>
+</tbody></table></div></section></main><%@ include file="/WEB-INF/jspf/footer.jspf" %></body></html>

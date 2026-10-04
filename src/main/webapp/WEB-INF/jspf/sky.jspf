@@ -1,0 +1,9 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- Animated sky: drifting clouds + two jets. Pure CSS/SVG. Add class "dark" for dark backgrounds. --%>
+<div class="sky <%= request.getAttribute("skyDark") != null ? "dark" : "" %>" aria-hidden="true">
+    <div class="sky-gradient"></div>
+    <div class="cloud cl1"></div><div class="cloud cl2"></div><div class="cloud cl3"></div><div class="cloud cl4"></div>
+    <div class="contrail"></div>
+    <svg class="jet" viewBox="0 0 160 60"><g fill="currentColor"><path d="M8 30 C30 22 90 20 140 28 C150 30 152 32 140 34 C90 40 30 40 8 30Z"/><path d="M60 28 L96 6 L108 6 L88 29Z"/><path d="M60 33 L96 54 L108 54 L88 32Z"/><path d="M14 29 L6 10 L20 10 L34 28Z"/></g></svg>
+    <svg class="jet j2" viewBox="0 0 160 60"><g fill="currentColor"><path d="M8 30 C30 22 90 20 140 28 C150 30 152 32 140 34 C90 40 30 40 8 30Z"/><path d="M60 28 L96 6 L108 6 L88 29Z"/><path d="M60 33 L96 54 L108 54 L88 32Z"/><path d="M14 29 L6 10 L20 10 L34 28Z"/></g></svg>
+</div>

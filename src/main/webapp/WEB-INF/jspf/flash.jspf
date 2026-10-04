@@ -1,0 +1,3 @@
+<%@ page pageEncoding="UTF-8" %>
+<% String flashOk=(String)session.getAttribute("flash"),flashBad=(String)session.getAttribute("flashError");session.removeAttribute("flash");session.removeAttribute("flashError"); %>
+<div class="toast-stack" aria-live="polite"><% if(flashOk!=null){%><div class="toast success" role="status"><span class="toast-icon">✓</span><span><%=h(flashOk)%></span><button type="button" class="toast-close" aria-label="Dismiss">×</button></div><%}%><% if(flashBad!=null){%><div class="toast error" role="alert"><span class="toast-icon">!</span><span><%=h(flashBad)%></span><button type="button" class="toast-close" aria-label="Dismiss">×</button></div><%}%></div>

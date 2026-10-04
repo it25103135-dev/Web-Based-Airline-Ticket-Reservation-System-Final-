@@ -1,0 +1,2 @@
+<%@ page contentType="text/html;charset=UTF-8" isErrorPage="true" %>
+<!doctype html><html lang="en"><head><title>500 | Lanka Wings Payments</title><%@ include file="/WEB-INF/jspf/head.jspf" %></head><body class="error-page"><div><span>500</span><h1>Server error</h1><p>Something went wrong in the payment module. Please try again.</p><a class="btn btn-orange" href="<%=cp%>/dashboard">Payment Dashboard</a></div></body></html>

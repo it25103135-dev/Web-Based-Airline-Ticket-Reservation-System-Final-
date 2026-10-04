@@ -1,0 +1,2 @@
+<%@ page contentType="text/html;charset=UTF-8" isErrorPage="true" %>
+<!doctype html><html lang="en"><head><title>404 | Lanka Wings Payments</title><%@ include file="/WEB-INF/jspf/head.jspf" %></head><body class="error-page"><div><span>404</span><h1>Page not found</h1><p>The requested payment route could not be found.</p><a class="btn btn-orange" href="<%=cp%>/dashboard">Payment Dashboard</a></div></body></html>
