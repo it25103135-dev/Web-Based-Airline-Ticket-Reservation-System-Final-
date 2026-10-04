@@ -1,7 +1,0 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<!doctype html><html lang="en"><head><title>Sign in | Lanka Wings</title><%@ include file="/WEB-INF/jspf/head.jspf" %></head>
-<body class="auth-page login-bg"><div class="auth-shade"></div><a class="brand light auth-brand" href="<%=cp%>/"><span class="brand-mark">LW</span><span>Lanka <b>Wings</b></span></a>
-<main class="auth-wrap"><section class="auth-message"><span class="eyebrow">CLIENT BOOKING OPERATIONS</span><h1>Booking<br><em>Management.</em></h1></section>
-<section class="auth-card"><span class="eyebrow navy">BOOKING PORTAL</span><h2>Sign in</h2><% if (err != null) { %><div class="alert error" role="alert"><%=h(err)%></div><% } %>
-<form method="post" action="<%=cp%>/login" data-validate autocomplete="on"><%@ include file="/WEB-INF/jspf/csrf.jspf" %><label>Username or email<input name="username" required maxlength="120" autocomplete="username" autofocus value="<%=h(request.getParameter("username"))%>"></label><label>Password<input type="password" name="password" required maxlength="128" autocomplete="current-password" data-toggle></label><button class="btn btn-orange full" type="submit">Sign In →</button></form>
-<div class="panel" style="margin-top:18px;padding:14px"><b>Demo logins</b><small class="muted" style="display:block;margin-top:6px">Travel Agent: <b>agent1</b> / <b>Agent@123</b><br>Passenger: <b>passenger1</b> / <b>Passenger@123</b><br>Admin: <b>admin</b> / <b>Admin@123</b></small></div></section></main></body></html>
