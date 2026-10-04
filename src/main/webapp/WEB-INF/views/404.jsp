@@ -1,0 +1,1 @@
+<%@ page contentType="text/html;charset=UTF-8" %><!doctype html><html><head><title>404 | Lanka Wings</title><%@ include file="/WEB-INF/jspf/head.jspf" %></head><body class="app-page"><main class="container narrow page-pad"><section class="panel"><h1>Page not found</h1><a class="btn btn-navy" href="<%=cp%>/dashboard">Back to dashboard</a></section></main></body></html>

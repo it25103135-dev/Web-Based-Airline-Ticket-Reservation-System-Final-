@@ -1,0 +1,27 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/jspf/flash.jspf" %>
+<%
+    Object unreadObj = request.getAttribute("unreadCount");
+    int unreadCount = unreadObj instanceof Integer ? (Integer) unreadObj : 0;
+%>
+<header class="topbar">
+  <a class="brand" href="<%=cp%>/dashboard"><span class="brand-mark">LW</span><span>Lanka <b>Wings</b></span></a>
+  <button class="nav-toggle" type="button" aria-label="Open menu">☰</button>
+  <nav class="nav-links">
+    <a class="<%=act(uri,"/dashboard")%>" href="<%=cp%>/dashboard">Account Dashboard</a>
+    <a class="<%=act(uri,"/profile")%>" href="<%=cp%>/profile">Profile</a>
+    <a class="<%=act(uri,"/notifications")%>" href="<%=cp%>/notifications">Notifications</a>
+    <% if ("ADMIN".equals(role)) { %>
+      <a class="<%=act(uri,"/admin/users")%>" href="<%=cp%>/admin/users">User Management</a>
+    <% } %>
+    <a class="nav-bell" href="<%=cp%>/notifications"
+       aria-label="Notifications"
+       data-unread-url="<%=cp%>/notifications?format=count">🔔
+      <span class="bell-badge" <%= unreadCount == 0 ? "hidden" : "" %>><%=unreadCount%></span>
+    </a>
+    <form method="post" action="<%=cp%>/logout" class="logout-form">
+      <%@ include file="/WEB-INF/jspf/csrf.jspf" %>
+      <button type="submit" class="nav-cta">Sign out</button>
+    </form>
+  </nav>
+</header>

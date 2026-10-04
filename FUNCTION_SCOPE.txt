@@ -1,0 +1,49 @@
+LANKA WINGS AIRLINES - USER MANAGEMENT + NOTIFICATION MANAGEMENT
+
+INCLUDED: USER MANAGEMENT
+- Passenger signup / registration
+- Login / logout
+- Session security and role-based access
+- Profile update
+- Password change
+- Self account deactivation
+- Administrator account creation
+- Administrator account editing
+- Role assignment
+- Account activation / deactivation
+- User audit trail
+
+INCLUDED: NOTIFICATION MANAGEMENT
+- Notification list
+- Unread count + header bell
+- Mark one / all as read
+- Delete one notification
+- Clear read notifications
+- Admin broadcast to all ACTIVE users
+- Admin send to one ACTIVE username
+- Welcome notifications
+- Profile/password security notifications
+- Admin account-change notifications
+
+OWNED DATA
+- Users
+- UserAudit
+- Notifications
+
+SHARED TECHNICAL DEPENDENCIES ONLY
+- SQL Server connection
+- CSRF protection
+- Password hashing
+- Rate limiting
+- HTML escaping
+- Validation
+- Common CSS / JavaScript / error pages
+
+EXCLUDED
+- Flight management
+- Ticket reservation
+- Booking management
+- Payment processing
+- Refund / customer support
+- Feedback management
+- Loyalty / promotions / reports
