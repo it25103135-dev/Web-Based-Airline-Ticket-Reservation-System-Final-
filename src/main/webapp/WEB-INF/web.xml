@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0">
+    <display-name>Lanka Wings Airlines</display-name>
+    <welcome-file-list><welcome-file>index.jsp</welcome-file></welcome-file-list>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!-- Turn this on when the site is served over HTTPS:  <secure>true</secure> -->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>   <!-- never put the session id in the URL -->
+    </session-config>
+
+    <error-page><error-code>403</error-code><location>/WEB-INF/views/403.jsp</location></error-page>
+    <error-page><error-code>404</error-code><location>/WEB-INF/views/404.jsp</location></error-page>
+    <error-page><error-code>500</error-code><location>/WEB-INF/views/500.jsp</location></error-page>
+    <error-page><exception-type>java.lang.Throwable</exception-type><location>/WEB-INF/views/500.jsp</location></error-page>
+</web-app>
